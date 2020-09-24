@@ -11,5 +11,6 @@ hToolPoint = uipushtool('CData', reshape(repmat([1 0 0], 100, 1), [10 10 3]), 'T
 hToolWarp = uipushtool('CData', reshape(repmat([0 0 1], 100, 1), [10 10 3]), 'TooltipString', 'compute warped image', ...
                        'ClickedCallback', @toolWarpCB);
 
+
 %% TODO: implement function: RBFImageWarp
 % check the title above the image for how to use the simple user-interface to define point-constraints and compute the warpped image

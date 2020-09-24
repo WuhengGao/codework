@@ -10,7 +10,13 @@ for i=1:numel(hlines)
     p2p(i*2+(-1:0),:) = hlines(i).getPosition();
 end
 
-im2 = RBFImageWarp(im, p2p(1:2:end,:), p2p(2:2:end,:));
-im3 = IDWImageWarp(im, p2p(1:2:end,:), p2p(2:2:end,:));
+%Fix four corners
+[h, w, ~] = size(im);
+fixpoint=[0.1,0.1;h-0.1,0.1;0.1,w-0.1;h-0.1,w-0.1];
+
+
+
+im2 = RBFImageWarp(im, [fixpoint;p2p(1:2:end,:)], [fixpoint;p2p(2:2:end,:)]);
+im3 = IDWImageWarp(im, [fixpoint;p2p(1:2:end,:)], [fixpoint;p2p(2:2:end,:)]);
 set(himg, 'CData', im2);
 set(himg2, 'CData', im3);
