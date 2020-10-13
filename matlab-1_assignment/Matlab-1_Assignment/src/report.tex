@@ -126,34 +126,43 @@
 其中$A(x)=Mx+b$为仿射变换，可以根据初始设定计算，这里我们选取其为恒等变换。\\
 而$R(x)$为径向基函数，$R(x)=\sum_{i=1}^n a_i g(||x-x_i||)$，这里选取$g(d)=(d^2+r^2)^{\mu/2},\mu=-1$，其中$r_i=\min{\{i\neq j\}}d(x_i,x_j)$。\\
 最后参数$a_i$可以由给定的插值条件求解方程组得到。\\
+注：程序在实现时将四个角固定作为初始设定。\\
 
 
-\newpage
-二.实验结果：
+二.白缝：\\
+这两种方法都是寻找一种连续的插值函数对图像进行变换，但是图像本身是离散的，这就导致我们只能计算原有图像上的点对应的点，而为了得到新的图像就需要对计算出来的点进行取整。又由于函数必然不是线性的，因此就会出现原来密集的点映射到相对较分散的区域的情况，这就产生了白缝。\\
+为了填补白缝，可以选取周围八个点中有效的点的颜色的平均值作为白缝处点的颜色值的近似。
+
+
+
+三.实验结果：
 \begin{figure}[htb]
   \centering
   \includegraphics[width=1.0\textwidth]{fig1.jpg}
   \caption{变形效果（压缩）}
   \label{fig:fig-1}
-%  \note{注：这里固定四个角，压缩四条边的中点处}
+\end{figure}
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=1.0\textwidth]{fig12.jpg}
+  \caption{变形并补白缝效果（压缩）}
+  \label{fig:fig-2}
 \end{figure}
 
 \begin{figure}[htb]
   \centering
   \includegraphics[width=1.0\textwidth]{fig2.jpg}
   \caption{变形效果（拉伸）}
-  \label{fig:fig-1}
-%  \note{注：这里固定四个角，拉伸四条边的中点处}
+  \label{fig:fig-3}
 \end{figure}
 
-\newpage
-这里我们在编程中默认固定住四个角，点红色按钮添加约束条件，点蓝色按钮计算变形图片。程序实现了拖动约束条件的位置时，同时计算变形图片，但是不足之处在于计算时间较长，拖动时不够流畅。分别压缩或拉伸四条边的中点处，可以看到两种方法的计算效果都较好。
-
-三.白缝：
-这两种方法都是寻找一种连续的插值函数对图像进行变换，但是图像本身是离散的，这就导致我们只能计算原有图像上的点对应的点，而为了得到新的图像就需要对计算出来的点进行取整。又由于函数必然不是线性的，因此就会出现原来密集的点映射到相对较分散的区域的情况，这就产生了白缝。
-
-
-
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=1.0\textwidth]{fig22.jpg}
+  \caption{变形并补白缝效果（拉伸）}
+  \label{fig:fig-4}
+\end{figure}
 
 
 

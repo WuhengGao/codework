@@ -51,7 +51,10 @@ for k=1:dim
     imi(idx)=im(:,:,k);
     im2(:,:,k)=imi;
 end
-    
+
+hole=setdiff(1:w*h,idx);
+im2=fixhole(im2,hole); 
+  
 
 
 
