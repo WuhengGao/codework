@@ -16,8 +16,9 @@ fixpoint=[0.1,0.1;h-0.1,0.1;0.1,w-0.1;h-0.1,w-0.1];
 
 
 
-im2 = RBFImageWarp2(im, [fixpoint;p2p(1:2:end,:)], [fixpoint;p2p(2:2:end,:)]);
-im3 = IDWImageWarp2(im, [fixpoint;p2p(1:2:end,:)], [fixpoint;p2p(2:2:end,:)]);
+[i2,j2]= RBFImageWarp2(im, [fixpoint;p2p(1:2:end,:)], [fixpoint;p2p(2:2:end,:)]);
+[i3,j3] = IDWImageWarp2(im, [fixpoint;p2p(1:2:end,:)], [fixpoint;p2p(2:2:end,:)]);
 
-set(himg, 'CData', im2);
-set(himg2, 'CData', im3);
+
+set(himg, 'XData', i2,'YData', j2);
+set(himg2, 'XData', i3,'YData', j3);

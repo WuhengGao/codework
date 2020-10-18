@@ -1,4 +1,4 @@
-function im2 = RBFImageWarp2(im, psrc, pdst)
+function [x2,y2] = RBFImageWarp2(im, psrc, pdst)
 
 % input: im, psrc, pdst
 %psrc:start points
@@ -7,10 +7,12 @@ function im2 = RBFImageWarp2(im, psrc, pdst)
 
 %% basic image manipulations
 % get image (matrix) size
-[h, w, dim] = size(im);
+[h, w,~] = size(im);
 n=size(pdst,1);
-im2=255*ones(h,w,dim);
+%im2=255*ones(h,w,dim);
 
+pdst(:,2)=h-pdst(:,2);
+psrc(:,2)=h-psrc(:,2);
 
 b=pdst-psrc;
 %d^2=xij=||psrc(i,:)-psrc(j,:)||^2
@@ -30,31 +32,27 @@ R=R';
 a=R\b;
 
 %% change image
-i=1:h;
-j=1:w;
-c1=repmat(i,n,1)-repmat(psrc(:,1),1,h);
+y=1:h;
+y=flipud(y);
+x=1:w;
+c1=repmat(y,n,1)-repmat(psrc(:,2),1,h);
 c1=repmat(c1,1,w);
-c2=repmat(j,n,1)-repmat(psrc(:,2),1,w);
+c2=repmat(x,n,1)-repmat(psrc(:,1),1,w);
 c2=kron(c2,ones(1,h));
 c=sqrt(c1.^2+c2.^2+repmat(r,1,w*h));
-i2=repmat(i,1,w)+sum(repmat(a(:,1),1,w*h)./c,1);
-j2=kron(j,ones(1,h))+sum(repmat(a(:,2),1,w*h)./c,1);
-i2=round(i2);
-j2=round(j2);
-i2(i2>h)=h;
-i2(i2<1)=1;
-j2(j2>w)=w;
-j2(j2<1)=1;
-idx=sub2ind([h,w],j2,i2);
-for k=1:dim
-    imi=255*ones(h,w);
-    imi(idx)=im(:,:,k);
-    im2(:,:,k)=imi;
-end
+y2=repmat(y,1,w)+sum(repmat(a(:,2),1,w*h)./c,1);
+x2=kron(x,ones(1,h))+sum(repmat(a(:,1),1,w*h)./c,1);
+y2=round(y2);
+x2=round(x2);
+y2(y2>h)=h;
+y2(y2<1)=1;
+x2(x2>w)=w;
+x2(x2<1)=1;
+y2=reshape(y2,h,w);
+x2=reshape(x2,h,w);
 
-hole=setdiff(1:w*h,idx);
-im2=fixhole(im2,hole); 
   
+
 
 
 
