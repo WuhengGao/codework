@@ -9,6 +9,6 @@ addNewPositionCallback(hh,@toolWarpCB);
 set(h, 'Enable', 'on', 'UserData', [h.UserData, hh]);
 
 
-w=1;
+
 
 

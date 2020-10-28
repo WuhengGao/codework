@@ -1,6 +1,6 @@
 im1 = imread('../TestImages/NewBackGround.png');
-%im2 = imread('../TestImages/BearInWater.png');
-im2 = imread('../TestImages/GirlInWater.png');
+im2 = imread('../TestImages/BearInWater.png');
+%im2 = imread('../TestImages/GirlInWater.png');
 
 %% draw 2 copies of the image
 figure('Units', 'pixel', 'Position', [100,100,1000,700], 'toolbar', 'none');

@@ -8,8 +8,7 @@ bw=find(b);
 %boundary of omega
 
 in=find(m1);
-inter=intersect(in,bw);
-m(inter)=0;
+m(intersect(in,bw))=0;
 in=find(m);
 m=m+2*b;
 ih=length(in);
@@ -26,11 +25,9 @@ s=4*ones(1,ih);
 %A=sparse(u,v,s);
 
 det=[1,-1,h,-h];
-
 for t=1:4
         q=in+det(t)*ones(ih,1);
-        mq=m(q);
-        flag=(mq==1);
+        flag=(m(q)==1);
         %q in omega
 
         uq=1:ih;

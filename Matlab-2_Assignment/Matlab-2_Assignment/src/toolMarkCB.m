@@ -19,9 +19,10 @@ m1=createMask(hp1);
 
 [A,mm]= computeA( im2, m1);
 
-
+%A=L'*L£¬pre-decomposition
 assignin('base', 'L', chol(A));
-%A=L'*L
+
+%m(i)=0,m(i)=1,m(i)=2:outside,omega,boundary of omega
 assignin('base', 'm', mm);
 
 set(h, 'Enable', 'on');

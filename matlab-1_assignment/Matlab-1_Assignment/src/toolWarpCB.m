@@ -12,13 +12,13 @@ end
 
 %Fix four corners
 [h, w, ~] = size(im);
-fixpoint=[0.1,0.1;h-0.1,0.1;0.1,w-0.1;h-0.1,w-0.1];
+fixpoint=[0.1,0.1;w-0.1,0.1;0.1,h-0.1;w-0.1,h-0.1];
 
 
 
-[i2,j2]= RBFImageWarp2(im, [fixpoint;p2p(1:2:end,:)], [fixpoint;p2p(2:2:end,:)]);
-[i3,j3] = IDWImageWarp2(im, [fixpoint;p2p(1:2:end,:)], [fixpoint;p2p(2:2:end,:)]);
+[x2,y2]= RBFImageWarp2(im, [fixpoint;p2p(1:2:end,:)], [fixpoint;p2p(2:2:end,:)]);
+[x3,y3] = IDWImageWarp2(im, [fixpoint;p2p(1:2:end,:)], [fixpoint;p2p(2:2:end,:)]);
 
 
-set(himg, 'XData', i2,'YData', j2);
-set(himg2, 'XData', i3,'YData', j3);
+set(himg, 'XData', x2,'YData', y2);
+set(himg2, 'XData', x3,'YData', y3);

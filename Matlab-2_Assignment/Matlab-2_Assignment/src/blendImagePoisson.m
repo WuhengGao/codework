@@ -1,8 +1,6 @@
 function imret = blendImagePoisson(im1, im2,m,L,dp)
-
-% input: im1 (background), im2 (foreground), m1 (mask in im2), 
-%L(A=L'*L),dp(f*p-fp)
-
+% input: im1 (background), im2 (foreground), m (mask in im2), 
+%L(A=L'*L),dp=f*p-fp
 
 %% TODO: compute blended image
 imret=im1;
@@ -34,6 +32,7 @@ for i=1:3
         vpq1=fp1-fq1;
         vpq2=fp2-fq2;
         flag=(abs(vpq1)>abs(vpq2));
+        %vpq=vpq1,if(abs(vpq1)>abs(vpq2));vpq=vpq2,else
         vpq=vpq1;
         vpq(~flag)=vpq2(~flag);
         %mixing gradients
@@ -46,21 +45,12 @@ for i=1:3
     end
 end
 
-%x=linsolve(L',b,'opts.LT = true');
-%x2=linsolve(L,x,'opts.UT = true');
+%L'*L*x=b,L:Upper triangular
+x=uint8(L\(L'\b));
 
-x=L'\b;
-x2=L\x;
-
-
-%L'Lx2=b,L:Upper triangular
-
-
-
-x2=uint8(x2);
 for i=1:3
     for j=1:ih
-        imret(tinx(j),tiny(j),i)=x2(j,i);
+        imret(tinx(j),tiny(j),i)=x(j,i);
     end
 end
 
